@@ -10,7 +10,7 @@ function filterStringsWithWildcard(phrases, part) {
 
     // Handle the case where part is empty
     if (!part) {
-        return []; // Or return [], depending on the desired behavior.  Returning all phrases seems more consistent with the description.
+        return phrases; // Or return [], depending on the desired behavior.  Returning all phrases seems more consistent with the description.
     }
 
     const regexPattern = partToRegex(part); // Convert the part string to a RegExp pattern
