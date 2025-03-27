@@ -91,15 +91,40 @@ body {
     flex-direction: column;
 }
 
+.search-bar-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
 #search-bar {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
     box-sizing: border-box;
     background-color: #333;
     border: 1px solid #555;
     color: #888;
-    font-size: 22px;
+    font: inherit;
+    font-size: 17px;
+}
+
+.count {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    color: #888;
+    font-size: 18px;
+    background: #555;
+    min-width: 30px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px 1px 1px 5px;
+    border-radius: 50% 0 0 50%;
+    box-shadow: 0 0 8px #888;
 }
 
 .results {

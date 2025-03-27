@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const sidebar = document.getElementById('sidebar');
     const sidebarToggle = document.getElementsByClassName('sidebar-toggle')[0];
 
-    const data = await jsonToMap('adabazi_words.json');
+    const data = await jsonToMap('adabazi_words.json')
 
     // Function to search results
     function performSearch(categoryIndex, searchText) {
@@ -129,6 +129,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         const searchText = searchBar.value;
         const categoryIndex = searchBar.dataset.categoryIndex || 0;
         const results = performSearch(categoryIndex, searchText);
+        const countElement = document.querySelector('.count');
+        countElement.textContent = results.length.toString();
         displayResults(results);
     });
 
