@@ -50,16 +50,33 @@ function partToRegex(part) {
     return new RegExp(regexPatternString, 'i'); // 'i' for case-insensitive matching
 }
 
-// // Example usage:
-// const phrases = ['carwash', 'keycard', 'oscar', 'car', 'caravan', 'unearth', 'unarmed', 'carmaker', 'supercar', 'a car is here'];
-//
-// console.log('car', filterStringsWithWildcard(phrases, 'car'));       // Output: ['carwash', 'keycard', 'oscar', 'car', 'caravan', 'carmaker', 'supercar', 'a car is here']
-// console.log('*car', filterStringsWithWildcard(phrases, '*car'));      // Output: ['oscar', 'car', 'supercar']
-// console.log('car*', filterStringsWithWildcard(phrases, 'car*'));      // Output: ['carwash', 'caravan', 'car', 'carmaker']
-// console.log('un*ar*', filterStringsWithWildcard(phrases, 'un*ar*'));    // Output: ['unearth', 'unarmed']
-// console.log('*ar*is*', filterStringsWithWildcard(phrases, 'a car is here')); // Output: ['a car is here']
-// console.log('nonexistent', filterStringsWithWildcard(phrases, 'nonexistent'));  // Output: []
-// console.log('empty', filterStringsWithWildcard(phrases, ''));  // Output: []
+
+/**
+ * Convert Persian numbers to English numbers
+ *
+ * @param {string} originalString - The string to convert
+ * @returns {string} The converted string
+ */
+function persianToEnglish(originalString) {
+    if (typeof originalString !== 'string') {
+        return originalString; // Return as is if not a string
+    }
+
+    const persianDigits = '۰۱۲۳۴۵۶۷۸۹';
+    const englishDigits = '0123456789';
+
+    let result = '';
+    for (let i = 0; i < originalString.length; i++) {
+        const char = originalString[i];
+        const persianIndex = persianDigits.indexOf(char);
+        if (persianIndex !== -1) {
+            result += englishDigits[persianIndex];
+        } else {
+            result += char; // Keep non-Persian characters as they are
+        }
+    }
+    return result;
+}
 
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -91,7 +108,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const sidebar = document.getElementById('sidebar');
     const sidebarToggle = document.getElementsByClassName('sidebar-toggle')[0];
 
-    const data = await jsonToMap('adabazi_words.json')
+    const data = await jsonToMap('adabazi_words.json');
 
     // Function to search results
     function performSearch(categoryIndex, searchText) {
@@ -126,7 +143,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Search bar event listener
     searchBar.addEventListener('input', () => {
-        const searchText = searchBar.value;
+        const searchText = persianToEnglish(searchBar.value);
         const categoryIndex = searchBar.dataset.categoryIndex || 0;
         const results = performSearch(categoryIndex, searchText);
         const countElement = document.querySelector('.count');
