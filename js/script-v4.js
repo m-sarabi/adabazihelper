@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const sidebar = document.getElementById('sidebar');
     const sidebarToggle = document.getElementsByClassName('sidebar-toggle')[0];
 
-    const data = await jsonToMap('adabazi_words.json');
+    const data = await jsonToMap('./assets/adabazi_words.json');
 
     // Function to search results
     function performSearch(categoryIndex, searchText) {
