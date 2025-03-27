@@ -96,7 +96,7 @@ body {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
-    overflow: hidden;
+    overflow: clip;
 }
 
 #search-bar {
@@ -108,6 +108,7 @@ body {
     color: #888;
     font: inherit;
     font-size: 17px;
+    height: 48px;
 }
 
 .count {
