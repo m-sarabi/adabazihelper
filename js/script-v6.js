@@ -134,6 +134,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         const listItem = document.createElement('li');
         listItem.textContent = category;
         listItem.addEventListener('click', () => {
+            document.querySelectorAll('.sidebar li').forEach(item => {
+                item.classList.remove('active');
+            });
+            listItem.classList.add('active');
             searchBar.dataset.categoryIndex = index;
             if (window.innerWidth < 768) {
                 sidebar.classList.add('collapsed');
@@ -142,6 +146,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
         categoriesList.appendChild(listItem);
     });
+
+    // activate the first category
+    document.querySelectorAll('.sidebar li')[0].classList.add('active');
 
     // Search bar event listener
     searchBar.addEventListener('input', () => {
@@ -199,20 +206,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
             const jsonData = await response.json();
             return JSON.parse(JSON.stringify(jsonData));
-            // const resultMap = new Map();
-            //
-            // for (const key in jsonData) {
-            //     if (jsonData.hasOwnProperty(key)) {
-            //         if (Array.isArray(jsonData[key]) && jsonData[key].every(item => typeof item === 'string')) {
-            //             resultMap.set(key, jsonData[key]);
-            //         } else {
-            //             console.error(`Invalid data format for key "${key}". Expected an array of strings.`);
-            //             return null; // or throw an error, depending on how you want to handle invalid data.
-            //         }
-            //     }
-            // }
-            //
-            // return resultMap;
         } catch (error) {
             console.error('Error reading JSON:', error);
             return null; // or throw an error, depending on how you want to handle errors.

@@ -79,6 +79,10 @@ ul, li {
     border-bottom: 1px solid #222; /* Separator for list items */
 }
 
+.sidebar li.active {
+    background-color: #1d1d1d; /* Active item background */
+}
+
 .sidebar li:hover {
     background-color: #222; /* Darker hover effect */
 }
@@ -198,8 +202,4 @@ ul, li {
         z-index: 10;
         transform: translateX(0); /* Initially hide sidebar */
     }
-
-    /*.main {*/
-    /*    padding-top: 60px; !* Adjust for fixed sidebar *!*/
-    /*}*/
 }
