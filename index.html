@@ -5,27 +5,27 @@
     <title>Adabazi Helper</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="Image/png" href="./assets/app_icon.png">
-    <link rel="stylesheet" href="css/style-v5.css">
+    <link rel="stylesheet" href="css/style-v6.css">
 </head>
 <body>
 <button class="sidebar-toggle">☰</button>
 <div class="container">
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h2>Categories</h2>
-        </div>
+    <aside class="sidebar" id="sidebar" dir="rtl">
         <div class="points">
-            <span>Points:</span>
+            <span>امتیاز: </span>
             <button id="p1" data-points="1">2</button>
             <button id="p2" data-points="2">4</button>
             <button id="p3" disabled data-points="3">6</button>
+        </div>
+        <div class="sidebar-header">
+            <h2>دسته‌بندی‌ها</h2>
         </div>
         <ul id="categories-list">
         </ul>
     </aside>
     <main class="main">
         <div class="search-bar-container">
-            <label for="search-bar"></label><input type="text" id="search-bar" placeholder="Search...">
+            <label for="search-bar"></label><input type="text" id="search-bar" placeholder="جستجو..." dir="rtl">
             <span class="count"></span>
         </div>
         <div id="results" class="results">
