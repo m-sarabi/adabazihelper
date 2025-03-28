@@ -199,13 +199,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     // if sidebar is not collapsed, mobile back button event should only collapse the sidebar
-    document.addEventListener("backbutton", (event) => {
+    // document.addEventListener("backbutton", (event) => {
+    //     if (!sidebar.classList.contains('collapsed')) {
+    //         toggleSidebar();
+    //         event.preventDefault();
+    //         event.stopPropagation();
+    //     }
+    // }, false);
+    window.addEventListener('popstate', () => {
         if (!sidebar.classList.contains('collapsed')) {
             toggleSidebar();
-            event.preventDefault();
-            event.stopPropagation();
         }
-    }, false);
+    });
 
     async function jsonToMap(filename) {
         try {
