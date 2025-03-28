@@ -198,18 +198,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     });
 
-    // if sidebar is not collapsed, mobile back button event should only collapse the sidebar
-    // document.addEventListener("backbutton", (event) => {
-    //     if (!sidebar.classList.contains('collapsed')) {
-    //         toggleSidebar();
-    //         event.preventDefault();
-    //         event.stopPropagation();
-    //     }
-    // }, false);
-    window.addEventListener('hardwareBackPress', () => {
+    window.history.pushState({page: 1}, '', '');
+
+    window.addEventListener('popstate', (event) => {
         if (!sidebar.classList.contains('collapsed')) {
+            // Prevent going back and instead toggle the class
+            event.preventDefault();
+
             toggleSidebar();
-            return true;
+
+            // Push another state to prevent leaving the page
+            window.history.pushState({page: 1}, '', '');
         }
     });
 
