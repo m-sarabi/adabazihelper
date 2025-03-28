@@ -206,9 +206,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     //         event.stopPropagation();
     //     }
     // }, false);
-    window.addEventListener('popstate', () => {
+    window.addEventListener('hardwareBackPress', () => {
         if (!sidebar.classList.contains('collapsed')) {
             toggleSidebar();
+            return true;
         }
     });
 
