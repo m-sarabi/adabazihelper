@@ -201,7 +201,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.history.pushState({page: 1}, '', '');
 
     window.addEventListener('popstate', (event) => {
-        if (!sidebar.classList.contains('collapsed')) {
+        const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        if (!sidebar.classList.contains('collapsed') && isMobile) {
             // Prevent going back and instead toggle the class
             event.preventDefault();
 
