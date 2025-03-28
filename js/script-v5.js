@@ -108,12 +108,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const sidebar = document.getElementById('sidebar');
     const sidebarToggle = document.getElementsByClassName('sidebar-toggle')[0];
 
+    const pointButtons = document.querySelectorAll('.points button');
+
     const data = await jsonToMap('./assets/adabazi_words.json');
 
     // Function to search results
-    function performSearch(categoryIndex, searchText) {
+    function performSearch(point, categoryIndex, searchText) {
         // const category = categories[categoryIndex];
-        const phrases = data.get((Number(categoryIndex) + 1).toString().padStart(2, '0'));
+        const phrases = data[point.toString().padStart(2, '0') + 'p'][(Number(categoryIndex) + 1).toString().padStart(2, '0')];
         return filterStringsWithWildcard(phrases, searchText);
     }
 
@@ -145,7 +147,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     searchBar.addEventListener('input', () => {
         const searchText = persianToEnglish(searchBar.value);
         const categoryIndex = searchBar.dataset.categoryIndex || 0;
-        const results = performSearch(categoryIndex, searchText);
+        const point = searchBar.dataset.point || 3;
+        const results = performSearch(point, categoryIndex, searchText);
         const countElement = document.querySelector('.count');
         countElement.textContent = results.length.toString();
         displayResults(results);
@@ -176,6 +179,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     sidebarToggle.addEventListener('click', toggleSidebar);
 
+    pointButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // enable other buttons and disable the clicked button
+            pointButtons.forEach(btn => {
+                btn.disabled = false;
+            });
+            button.disabled = true;
+            searchBar.dataset.point = button.dataset.points;
+            searchBar.dispatchEvent(new Event('input'));
+        });
+    });
+
     async function jsonToMap(filename) {
         try {
             const response = await fetch(filename);
@@ -183,20 +198,21 @@ document.addEventListener('DOMContentLoaded', async () => {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const jsonData = await response.json();
-            const resultMap = new Map();
-
-            for (const key in jsonData) {
-                if (jsonData.hasOwnProperty(key)) {
-                    if (Array.isArray(jsonData[key]) && jsonData[key].every(item => typeof item === 'string')) {
-                        resultMap.set(key, jsonData[key]);
-                    } else {
-                        console.error(`Invalid data format for key "${key}". Expected an array of strings.`);
-                        return null; // or throw an error, depending on how you want to handle invalid data.
-                    }
-                }
-            }
-
-            return resultMap;
+            return JSON.parse(JSON.stringify(jsonData));
+            // const resultMap = new Map();
+            //
+            // for (const key in jsonData) {
+            //     if (jsonData.hasOwnProperty(key)) {
+            //         if (Array.isArray(jsonData[key]) && jsonData[key].every(item => typeof item === 'string')) {
+            //             resultMap.set(key, jsonData[key]);
+            //         } else {
+            //             console.error(`Invalid data format for key "${key}". Expected an array of strings.`);
+            //             return null; // or throw an error, depending on how you want to handle invalid data.
+            //         }
+            //     }
+            // }
+            //
+            // return resultMap;
         } catch (error) {
             console.error('Error reading JSON:', error);
             return null; // or throw an error, depending on how you want to handle errors.

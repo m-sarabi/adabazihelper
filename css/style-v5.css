@@ -82,6 +82,34 @@ body {
     background-color: #222; /* Darker hover effect */
 }
 
+.points {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.points span {
+    color: #777;
+    font-size: 1.2em;
+}
+
+.points button {
+    background: #444;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 5px;
+    border: 3px solid #666;
+    color: #777;
+    font-size: 1.4em;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.points button:disabled {
+    opacity: 1;
+    cursor: not-allowed;
+}
+
 .main {
     flex-grow: 1;
     padding: 20px;
